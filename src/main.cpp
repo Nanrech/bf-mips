@@ -116,7 +116,7 @@ int main(int argc, char* argv[]) {
   inFile.close();
 
   // ---- Insert starting code ----
-  outFile << "# Generated Code Bla Bla Bla\n"
+  outFile << "# Code generated using github.com/Nanrech/bf-mips\n"
              ".data\ntape: .space 4096\n\n"
              ".text\nmain:\n"
              "  # Set Memory Pointer\n"
