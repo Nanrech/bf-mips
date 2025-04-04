@@ -1,6 +1,6 @@
 # Code generated using github.com/Nanrech/bf-mips
 .data
-tape: .space 4096
+tape: .space 30000
 
 .text
 main:
@@ -8,13 +8,13 @@ main:
   la $t0, tape
 
   # Zero out tape
-  li $t1, 4096
+  li $t1, 7500
   _clear_tape:
-  sb $zero, 0($t0)
-  addi $t0, $t0, 1
+  sw $zero, 0($t0)
+  addi $t0, $t0, 4
   addi $t1, $t1, -1
   bnez $t1, _clear_tape
-  addi $t0, $t0, -4096
+  la $t0, tape
 
   addi $t1, $t1, 8 # +
   andi $t1, $t1, 0xff
