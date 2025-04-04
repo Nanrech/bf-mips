@@ -1,9 +1,7 @@
-#include <cstdint>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <stack>
-#include <array>
 
 #define IS_CHAR_VALID(currentChar) (currentChar == '>' || currentChar == '<' || currentChar == '+' || currentChar == '-' || currentChar == '.' || currentChar == ',' || currentChar == '[' || currentChar == ']')
 #define IS_CHAR_MULTI(currentChar) (currentChar == '>' || currentChar == '<' || currentChar == '+' || currentChar == '-')
@@ -11,7 +9,7 @@
 
 typedef struct Token {
   char type;
-  size_t data; // reference to matching instruction OR n of times command should be repeated
+  unsigned int data; // reference to matching instruction OR n of times command should be repeated
 } Token;
 
 int main(int argc, char* argv[]) {
@@ -56,6 +54,12 @@ int main(int argc, char* argv[]) {
     lastChar = currentChar;
   }
 
+  // Check if file was empty
+  if (tokenAmount == 0) {
+    std::cout << "No brainfuck detected inside " << argv[1] << std::endl;
+    return 1;
+  }
+
   // ---- init command storage ----
   std::vector<Token> commands;
   commands.resize(tokenAmount);
@@ -67,9 +71,9 @@ int main(int argc, char* argv[]) {
   // ---- Store tokens ----
   // Second pass, store tokens
   size_t i = 0;
-  size_t data = 1;
+  unsigned int data = 1;
   lastChar = '\0';
-  size_t bracketIndex = 0;
+  unsigned int bracketIndex = 0;
   std::stack<size_t> bracketStack;
 
   while (inFile.get(currentChar)) {
