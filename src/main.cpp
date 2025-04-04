@@ -117,18 +117,18 @@ int main(int argc, char* argv[]) {
 
   // ---- Insert starting code ----
   outFile << "# Code generated using github.com/Nanrech/bf-mips\n"
-             ".data\ntape: .space 4096\n\n"
+             ".data\ntape: .space 30000\n\n"
              ".text\nmain:\n"
              "  # Set Memory Pointer\n"
              "  la $t0, tape\n\n"
              "  # Zero out tape\n"
-             "  li $t1, 4096\n"
+             "  li $t1, 7500\n"
              "  _clear_tape:\n"
-             "  sb $zero, 0($t0)\n"
-             "  addi $t0, $t0, 1\n"
+             "  sw $zero, 0($t0)\n"
+             "  addi $t0, $t0, 4\n"
              "  addi $t1, $t1, -1\n"
              "  bnez $t1, _clear_tape\n"
-             "  addi $t0, $t0, -4096\n\n";
+             "  la $t0, tape\n\n";
 
   // ---- Generate output code ----
   for (auto c : commands) {
